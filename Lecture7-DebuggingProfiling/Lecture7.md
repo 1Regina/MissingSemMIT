@@ -1,2 +1,2 @@
-No notes taken as this topic is foreseeably not commonly used except Debugging part ~ pyflakes and python debugger https://docs.python.org/3/library/pdb.html for how it is used.
-Refer to MIT website instead. https://missing.csail.mit.edu/2020/debugging-profiling/
+No notes taken as this topic is foreseeably not commonly used except Debugging part ~ ```pyflakes``` and [python debugger](https://docs.python.org/3/library/pdb.html) for how it is used.
+Refer to [MIT website](https://missing.csail.mit.edu/2020/debugging-profiling/) instead. 
