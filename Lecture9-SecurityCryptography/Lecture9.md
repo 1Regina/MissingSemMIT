@@ -65,4 +65,18 @@
        2. [Web of trust](https://en.wikipedia.org/wiki/Web_of_trust) at PGP
        3. [Social Proof](https://keybase.io/blog/chat-apps-softer-than-tofu) with Keybase --> liked by MIT 
 8.  ### Other passwords security ###
-    1.  
+    1.  Password Managers (e.g [KeePassXC](https://keepassxc.org/), [pass](https://www.passwordstore.org/), and [1Password](https://1password.com/)): generate random high-entropy passwords, save all in one place, encrypted with a symmetric cipher with a key produced from a passphrase by KDF Benefits:  
+        * avoid password reuse
+        * use high entropy passwords
+        * only need to remember a single high-entropy password.
+    2.  Two-factor authentication ([2FA](https://en.wikipedia.org/wiki/Multi-factor_authentication)) requires a passphrase/password + Yubikey or phone password sms (SMU) or RSA token (Ngee Ann Poly) or some digital token in mobile app (banks). This protects against stolen passwords and [phishing](https://en.wikipedia.org/wiki/Phishing) attacks.
+    3.  Full disk encryption (e.g when sudo apt install) encrypts the entire disk with a symmetric cipher, with a key protected by a passphrase
+        * Linux -  [cryptsetup + LUKS](https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_a_non-root_file_system)
+        * Windows - [BitLocker](https://fossbytes.com/enable-full-disk-encryption-windows-10/)
+        * macOS - [FireVault](https://support.apple.com/en-us/HT204837)
+    4. Private messaging - end-to-end security bootstrapped from asymmetric-key encryption. Need to obtain the contacts' public key and authenticate with out-of-band (with Signal or Keybase), or trust social proofs (with Keybase).
+    5. SSH (like in github to our smu remote server access)
+       1. ```ssh-keygen``` will generates an asymmetric keypair, ```public_key```, ```private_key```. Public key is public but private key is encrypted on disk.
+       2.  ```ssh-keygen``` program prompts the user for a passphrase, and this is fed through a key derivation function (KDF) to produce a key, which is then used to encrypt the private key with a symmetric cipher.
+       3.  The client's public key is stored in the ```.ssh/authorized_keys``` file. The client's identity is verified with asymmetric signature through [challenge-response](https://en.wikipedia.org/wiki/Challenge%E2%80%93response_authentication)
+       4.  Roughly, the server send a random number to the client -> Client signs the message and also sends the signature to the server -> Server verify the signature against the public key on its record -> ```Verify PublicKeyReceived = PublicKeyOnRecord = True``` to authenticate the client -> this proves that client does indeed have the private key corresponding/paired to the public key that is in server's ``` .ssh/authorized_keys```  file -> allow the client to login 
